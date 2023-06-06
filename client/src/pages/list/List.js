@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import Navbar from "../../components/Navbar/Navbar";
@@ -9,9 +9,11 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import "./List.css";
 import SearchItem from "../../components/SearchItem/SearchItem";
 import useFetch from "../../hooks/useFetch";
+import { SearchContext } from "../../context/SearchContext";
 
 const List = () => {
   const location = useLocation();
+  const { dispatch } = useContext(SearchContext);
   const [destination, setDestination] = useState(location.state.destination);
   const [dates, setDates] = useState(location.state.dates);
   const [options, setOptions] = useState(location.state.options);
@@ -21,10 +23,16 @@ const List = () => {
   const { data, loading, error, reFetch } = useFetch(
     `/hotels?city=${destination}&min=${min || 0}&max=${max || 999}`
   );
-  console.log(options);
-  console.log(dates);
+
   const handleClick = () => {
-    //change dates of search context todo:
+    dispatch({
+      type: "NEW_SEARCH",
+      payload: {
+        destination,
+        dates,
+        options,
+      },
+    });
     reFetch();
   };
 

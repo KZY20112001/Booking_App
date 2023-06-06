@@ -13,6 +13,9 @@ const INITIAL_STATE = {
 export const SearchContext = createContext(INITIAL_STATE);
 
 const SearchReducer = (state, action) => {
+  console.log(action);
+  console.log(action.payload);
+  console.log(state);
   switch (action.type) {
     case "NEW_SEARCH":
       return action.payload;
