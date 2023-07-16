@@ -1,17 +1,15 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/api/node_modules
-/client/node_modules
-/admin/node_modules
+/*/node_modules
+
 /.pnp
 .pnp.js
 
 
 # env variables 
-/api/.env
-/admin/.env
-/client/.env
+/*/.env
+
 
 # testing
 /coverage
